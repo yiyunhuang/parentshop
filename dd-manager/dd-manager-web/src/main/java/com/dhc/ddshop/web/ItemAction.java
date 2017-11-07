@@ -1,6 +1,9 @@
 package com.dhc.ddshop.web;
 
+import com.dhc.ddshop.common.dto.Page;
+import com.dhc.ddshop.common.dto.Result;
 import com.dhc.ddshop.pojo.po.TbItem;
+import com.dhc.ddshop.pojo.vo.TbItemCustom;
 import com.dhc.ddshop.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * User: DHC
@@ -37,12 +38,25 @@ public class ItemAction {
         return tbItem;
     }
 
+//    @ResponseBody
+//    @RequestMapping("/items")
+//    public List<TbItem> listItems(){
+//        List<TbItem> list = null;
+//        try {
+//            list = itemService.listItems();
+//        }catch (Exception e) {
+//            logger.error(e.getMessage(), e);
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
+
     @ResponseBody
     @RequestMapping("/items")
-    public List<TbItem> listItems(){
-        List<TbItem> list = null;
+    public Result<TbItemCustom> listItemsByPage(Page page){
+        Result<TbItemCustom> list = null;
         try {
-            list = itemService.listItems();
+            list = itemService.listItemsByPage(page);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
