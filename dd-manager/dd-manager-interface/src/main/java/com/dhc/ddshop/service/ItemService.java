@@ -5,6 +5,8 @@ import com.dhc.ddshop.common.dto.Result;
 import com.dhc.ddshop.pojo.po.TbItem;
 import com.dhc.ddshop.pojo.vo.TbItemCustom;
 
+import java.util.List;
+
 /**
  * User: DHC
  * Date: 2017/11/6
@@ -23,4 +25,11 @@ public interface ItemService {
      * @return
      */
     Result<TbItemCustom> listItemsByPage(Page page);
+
+    /**
+     * 批量修改
+     * @param ids
+     * @return
+     */
+    int updateBatch(List<Long> ids);
 }
