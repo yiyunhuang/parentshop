@@ -7,9 +7,11 @@ import com.dhc.ddshop.common.util.IDUtils;
 import com.dhc.ddshop.dao.TbItemCustomMapper;
 import com.dhc.ddshop.dao.TbItemDescMapper;
 import com.dhc.ddshop.dao.TbItemMapper;
+import com.dhc.ddshop.dao.TbItemParamItemMapper;
 import com.dhc.ddshop.pojo.po.TbItem;
 import com.dhc.ddshop.pojo.po.TbItemDesc;
 import com.dhc.ddshop.pojo.po.TbItemExample;
+import com.dhc.ddshop.pojo.po.TbItemParamItem;
 import com.dhc.ddshop.pojo.vo.TbItemCustom;
 import com.dhc.ddshop.pojo.vo.TbItemQuery;
 import com.dhc.ddshop.service.ItemService;
@@ -41,6 +43,8 @@ public class ItemServiceImpl implements ItemService {
     private TbItemCustomMapper itemCustomDao;
     @Autowired
     private TbItemDescMapper itemDescDao;
+    @Autowired
+    private TbItemParamItemMapper itemParamItemDao;
 
     @Override
     public TbItem getById(Long itemId) {
@@ -105,13 +109,13 @@ public class ItemServiceImpl implements ItemService {
         return i;
     }
     //加上注解@Transactional之后，这个方法就变成了事务方法
-    //并不是事务方法越多越好，查询方法不需要添加为事务方法
+    //并不是事务方法越多越好，查询方法不需要添加tb_item，tb_item_desc，tb_item_param_item为事务方法
     @Transactional
     @Override
-    public int saveItem(TbItem tbItem, String content) {
+    public int saveItem(TbItem tbItem, String content,String paramData) {
         int i = 0;
         try {
-            //这个方法中需要处理两张表格tb_item tb_item_desc
+            //这个方法中需要处理三张表格
             //调用工具类生成商品的ID
             //处理tb_item
             Long itemId= IDUtils.getItemId();
@@ -127,6 +131,13 @@ public class ItemServiceImpl implements ItemService {
             desc.setCreated(new Date());
             desc.setUpdated(new Date());
             i+=itemDescDao.insert(desc);
+            //处理tb_item_param_item
+            TbItemParamItem tbItemParamItem = new TbItemParamItem();
+            tbItemParamItem.setItemId(itemId);
+            tbItemParamItem.setParamData(paramData);
+            tbItemParamItem.setCreated(new Date());
+            tbItemParamItem.setUpdated(new Date());
+            i += itemParamItemDao.insert(tbItemParamItem);
 
         }catch (Exception e){
             logger.error(e.getMessage(), e);
