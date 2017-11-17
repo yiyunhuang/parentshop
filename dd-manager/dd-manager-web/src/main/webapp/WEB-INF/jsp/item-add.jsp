@@ -135,7 +135,11 @@
     UE.delEditor('container');
 
     //实例化富文本编辑器
-    var ue = UE.getEditor('container');
+    var ue = UE.getEditor('container',{
+        serverUrl: "file/upload",
+        initialFrameWidth: '100%' , //初始化编辑器宽度,默认1000
+        initialFrameHeight:'300'  //初始化编辑器高度,默认320
+    });
     //加载商品类目的树形下拉框
     $('#cid').combotree({
         url: 'itemCats?parentId=0',

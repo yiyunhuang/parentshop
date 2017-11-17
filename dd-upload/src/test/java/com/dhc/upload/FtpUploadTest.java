@@ -1,11 +1,14 @@
+/*
 package com.dhc.upload;
 
+import com.dhc.ddshop.common.util.FtpUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class FtpUploadTest {
     @Test
@@ -29,4 +32,11 @@ public class FtpUploadTest {
         ftpClient.logout();
 
     }
+    @Test
+    public void testFtpUtil() throws FileNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream(new File("d:\\103.gif"));
+        FtpUtils.uploadFile("10.31.161.110",21,"ftpuser","hyf110hyf","/home/ftpuser/www/images","/2017/09/11","hello2.gif",fileInputStream);
+
+    }
 }
+*/
