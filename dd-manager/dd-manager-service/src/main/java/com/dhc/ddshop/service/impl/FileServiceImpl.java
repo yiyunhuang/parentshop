@@ -48,7 +48,7 @@ public class FileServiceImpl implements FileService {
                     map.put("title",newName);
                     map.put("original",originalFilename);
                     map.put("type",fileType);
-                    map.put("url",basePath+filePath+"/"+newName);
+                    map.put("url",/*basePath+*/filePath+"/"+newName);
                     map.put("size",multipartFile.getSize());
                 }
             return map;

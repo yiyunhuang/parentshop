@@ -23,4 +23,6 @@ public class IndexAction {
     public String page(@PathVariable("page") String page){
         return page;
     }
+
+
 }

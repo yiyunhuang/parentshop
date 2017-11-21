@@ -11,6 +11,8 @@
         <module>../dd-common</module>
         <module>../dd-manager</module>
         <module>../dd-upload</module>
+        <module>../dd-portal-web</module>
+        <module>../dd-lucene</module>
     </modules>
     <!--打包方式，默认为jar-->
     <packaging>pom</packaging>
